@@ -5,12 +5,15 @@ public class ImportDataFacade implements ImportData {
 
 	@Override
 	public synchronized void startImport(String address, int port) {
-		socket = new ImportSocket(address, port);
-		socket.listen();
+		if(socket == null){
+			socket = new ImportSocket(address, port);
+			socket.listen();
+		}
 	}
 
 	@Override
-	public void stopImport() {
+	public synchronized void stopImport() {
 		socket.closeSocket();
+		socket = null;
 	}
 }

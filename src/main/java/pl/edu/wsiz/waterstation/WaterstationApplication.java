@@ -10,6 +10,6 @@ public class WaterstationApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(WaterstationApplication.class, args);
 		ImportDataFacade socket = new ImportDataFacade();
-		socket.startImport("http://localhost", 8081);
+		socket.startImport("127.0.0.1", 8081);
 	}
 }

@@ -1,26 +1,27 @@
 package pl.edu.wsiz.waterstation.importsensors;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.net.SocketException;
-import java.net.SocketTimeoutException;
+import java.net.*;
 import java.util.ArrayList;
 
+@Slf4j
 class ImportSocket implements Runnable {
 	private static ArrayList<Thread> servicingThreads;
 	private ServerSocket serverSocket;
 
 	private volatile boolean running = true;
 
-	public ImportSocket(String address, int port) {
+	ImportSocket(String address, int port) {
 		servicingThreads = new ArrayList<>();
 		new Thread(this).start();
 
 		try {
-			serverSocket = new ServerSocket(port);
+			InetAddress addr = InetAddress.getByName(address);
+			serverSocket = new ServerSocket(port, 50, addr);
 			System.out.println("Waiting for client on port " + serverSocket.getLocalPort() + "..");
 			running = true;
 		} catch (SocketException se) {
