@@ -5,7 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.sql.Date;
+import java.util.Calendar;
 
 @Entity
 @Table(name = "MeasuredValue")
@@ -24,9 +26,10 @@ public class MeasuredValue {
 	private Sensor sensor;
 
 	@Column(name = "Value")
+	@NotNull
 	private float value;
 
 	@Column(name = "MeasuredTime")
-	private Date measuredTime;
+	private Date measuredTime = new Date(Calendar.getInstance().getTime().getTime());
 
 }

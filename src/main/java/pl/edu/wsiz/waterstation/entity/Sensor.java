@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "sensor")
@@ -23,6 +24,7 @@ public class Sensor {
 	private Shield shield;
 
 	@Column(name = "PhysicalSensorId")
+	@NotNull
 	private String physicalSensorId;
 	@Column(name = "Name")
 	private String name;

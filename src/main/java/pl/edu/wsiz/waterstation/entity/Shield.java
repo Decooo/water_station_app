@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "Shield")
@@ -18,7 +19,8 @@ public class Shield {
 	@Column(name = "ShieldId")
 	private Long shieldId;
 
-	@Column(name = "PhysicalShieldId")
+	@Column(name = "PhysicalShieldId", unique = true)
+	@NotNull
 	private String physicalShieldId;
 	@Column(name = "Name")
 	private String name;

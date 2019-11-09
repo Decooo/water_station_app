@@ -3,6 +3,7 @@ package pl.edu.wsiz.waterstation.entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 
@@ -23,5 +24,5 @@ public class ShieldConfiguration {
 	private Shield shieldId;
 
 	@Column(name = "DeepSleep")
-	private long deepSleep;
+	private long deepSleep = 5000000;
 }
