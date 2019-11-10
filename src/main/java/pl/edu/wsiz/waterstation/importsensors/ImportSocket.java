@@ -1,14 +1,14 @@
 package pl.edu.wsiz.waterstation.importsensors;
 
-import lombok.extern.slf4j.Slf4j;
+import net.minidev.json.JSONObject;
+import org.apache.commons.lang3.StringUtils;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-@Slf4j
 class ImportSocket implements Runnable {
 	private static ArrayList<Thread> servicingThreads;
 	private ServerSocket serverSocket;
@@ -42,7 +42,12 @@ class ImportSocket implements Runnable {
 				Thread thread = new Thread();
 				servicingThreads.add(thread);
 
-				read(socket);
+				String input = read(socket);
+				if (!StringUtils.isEmpty(input)) {
+					ImportDataService dataService = new ImportDataService();
+					Long deepSleep = dataService.importDataAndReturnDeepSleep(input);
+					sendResponse(socket, deepSleep);
+				}
 
 				thread.start();
 			} catch (SocketException e) {
@@ -53,16 +58,37 @@ class ImportSocket implements Runnable {
 		}
 	}
 
-	private void read(Socket socket) {
-		String readLine;
-		try (BufferedReader reader = new BufferedReader(
-				new InputStreamReader(socket.getInputStream()))) {
-			String inputString = "";
-			while ((readLine = reader.readLine()) != null) {
-				inputString += readLine;
-			}
+	private String read(Socket socket) throws IOException {
+		InputStream is = socket.getInputStream();
+		InputStreamReader isReader = new InputStreamReader(is);
+		BufferedReader br = new BufferedReader(isReader);
 
-			System.out.println("inputString = " + inputString);
+		String headerLine;
+		while ((headerLine = br.readLine()).length() != 0) {
+			headerLine += headerLine;
+		}
+
+		StringBuilder body = new StringBuilder();
+		while (br.ready()) {
+			body.append((char) br.read());
+		}
+		System.out.println("Body data is: " + body.toString());
+		return body.toString();
+	}
+
+	private void sendResponse(Socket socket, Long deepSleep) {
+		try {
+			Map<String, Long> body = new HashMap<>();
+			body.put("deepSleep", deepSleep);
+
+			BufferedWriter out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+			out.write("HTTP/1.1 200 OK\r\n");
+			out.write("Content-Type: text/html\r\n");
+			out.write("\r\n");
+			out.write(new JSONObject(body).toString());
+
+			out.flush();
+			out.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
