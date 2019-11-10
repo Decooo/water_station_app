@@ -5,7 +5,7 @@ public class ImportDataFacade implements ImportData {
 
 	@Override
 	public synchronized void startImport(String address, int port) {
-		if(socket == null){
+		if (socket == null) {
 			socket = new ImportSocket(address, port);
 			socket.listen();
 		}
@@ -15,5 +15,10 @@ public class ImportDataFacade implements ImportData {
 	public synchronized void stopImport() {
 		socket.closeSocket();
 		socket = null;
+	}
+
+	@Override
+	public boolean isRunning() {
+		return socket != null;
 	}
 }

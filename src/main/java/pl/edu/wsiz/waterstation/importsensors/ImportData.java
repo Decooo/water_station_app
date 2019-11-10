@@ -5,4 +5,6 @@ public interface ImportData {
 	void startImport(String address, int port);
 
 	void stopImport();
+
+	boolean isRunning();
 }
