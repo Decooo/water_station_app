@@ -7,7 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.sql.Date;
+import java.util.Date;
 import java.util.Calendar;
 
 @Entity
@@ -31,7 +31,8 @@ public class MeasuredValue {
 	@NotNull
 	private float value;
 
-	@Column(name = "MeasuredTime")
+	@Column(name = "MeasuredTime", columnDefinition="DATETIME")
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date measuredTime = new Date(Calendar.getInstance().getTime().getTime());
 
 }

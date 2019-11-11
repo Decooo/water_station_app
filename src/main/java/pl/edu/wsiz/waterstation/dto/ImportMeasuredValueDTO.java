@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class MeasuredValueDTO {
+public class ImportMeasuredValueDTO {
 
 	private String physicalShieldId;
 	private String physicalSensorId;

@@ -1,12 +1,7 @@
 package pl.edu.wsiz.waterstation.importsensors;
 
-import lombok.extern.slf4j.Slf4j;
 import net.minidev.json.JSONObject;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-import pl.edu.wsiz.waterstation.repository.ShieldRepository;
 
 import java.io.*;
 import java.net.*;
