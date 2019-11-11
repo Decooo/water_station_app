@@ -16,7 +16,6 @@ import pl.edu.wsiz.waterstation.repository.SensorRepository;
 import pl.edu.wsiz.waterstation.repository.ShieldConfigurationRepository;
 import pl.edu.wsiz.waterstation.repository.ShieldRepository;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Optional;

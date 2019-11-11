@@ -26,5 +26,5 @@ public class ShieldConfiguration {
 	private Shield shieldId;
 
 	@Column(name = "DeepSleep")
-	private long deepSleep = 5000000;
+	private long deepSleep = 5000000L;
 }
