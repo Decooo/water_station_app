@@ -2,6 +2,7 @@ package pl.edu.wsiz.waterstation.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -13,6 +14,7 @@ import java.util.Calendar;
 @Table(name = "MeasuredValue")
 @Getter
 @Setter
+@RequiredArgsConstructor
 @AllArgsConstructor
 public class MeasuredValue {
 

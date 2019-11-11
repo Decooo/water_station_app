@@ -2,6 +2,7 @@ package pl.edu.wsiz.waterstation.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 
@@ -11,6 +12,7 @@ import javax.persistence.*;
 @Table(name = "ShieldConfiguration")
 @Getter
 @Setter
+@RequiredArgsConstructor
 @AllArgsConstructor
 public class ShieldConfiguration {
 

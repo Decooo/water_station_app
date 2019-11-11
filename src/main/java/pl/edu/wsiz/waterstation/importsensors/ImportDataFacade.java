@@ -1,12 +1,18 @@
 package pl.edu.wsiz.waterstation.importsensors;
 
 public class ImportDataFacade implements ImportData {
+
+	private final ImportDataService importDataService;
 	private ImportSocket socket;
+
+	public ImportDataFacade(ImportDataService importDataService) {
+		this.importDataService = importDataService;
+	}
 
 	@Override
 	public synchronized void startImport(String address, int port) {
 		if (socket == null) {
-			socket = new ImportSocket(address, port);
+			socket = new ImportSocket(address, port, importDataService);
 			socket.listen();
 		}
 	}

@@ -2,6 +2,7 @@ package pl.edu.wsiz.waterstation.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "Shield")
 @Getter
 @Setter
+@RequiredArgsConstructor
 @AllArgsConstructor
 public class Shield {
 

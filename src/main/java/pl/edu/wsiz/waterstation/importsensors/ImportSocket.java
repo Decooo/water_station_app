@@ -1,7 +1,12 @@
 package pl.edu.wsiz.waterstation.importsensors;
 
+import lombok.extern.slf4j.Slf4j;
 import net.minidev.json.JSONObject;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import pl.edu.wsiz.waterstation.repository.ShieldRepository;
 
 import java.io.*;
 import java.net.*;
@@ -10,12 +15,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 class ImportSocket implements Runnable {
+
+	private ImportDataService importDataService;
+
 	private static ArrayList<Thread> servicingThreads;
 	private ServerSocket serverSocket;
 
 	private volatile boolean running = true;
 
-	ImportSocket(String address, int port) {
+	ImportSocket(String address, int port, ImportDataService importDataService) {
+		this.importDataService = importDataService;
 		servicingThreads = new ArrayList<>();
 		new Thread(this).start();
 
@@ -44,8 +53,7 @@ class ImportSocket implements Runnable {
 
 				String input = read(socket);
 				if (!StringUtils.isEmpty(input)) {
-					ImportDataService dataService = new ImportDataService();
-					Long deepSleep = dataService.importDataAndReturnDeepSleep(input);
+					Long deepSleep = importDataService.importDataAndReturnDeepSleep(input);
 					sendResponse(socket, deepSleep);
 				}
 
