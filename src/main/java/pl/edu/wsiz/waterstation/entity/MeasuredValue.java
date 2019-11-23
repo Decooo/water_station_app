@@ -21,7 +21,7 @@ public class MeasuredValue {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "MeasuredValueId")
-	private Long measuredValuId;
+	private Long measuredValueId;
 
 	@ManyToOne
 	@JoinColumn(name = "SensorId", referencedColumnName = "SensorId")
