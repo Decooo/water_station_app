@@ -3,8 +3,8 @@ package pl.edu.wsiz.waterstation.importsensors;
 public class ImportDataFacade implements ImportData {
 
 	private final ImportDataService importDataService;
-	private ImportSocket socket;
-	private Thread threadSocket;
+	private static ImportSocket socket;
+	private static Thread threadSocket;
 
 	public ImportDataFacade(ImportDataService importDataService) {
 		this.importDataService = importDataService;
@@ -37,7 +37,7 @@ public class ImportDataFacade implements ImportData {
 	}
 
 	@Override
-	public boolean isRunning() {
+	public synchronized boolean isRunning() {
 		return socket != null;
 	}
 }
