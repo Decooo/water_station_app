@@ -6,8 +6,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.edu.wsiz.waterstation.dto.LastValueDTO;
+import pl.edu.wsiz.waterstation.dto.ValueDTO;
 import pl.edu.wsiz.waterstation.service.MeasuredValueService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/value")
@@ -21,7 +23,12 @@ public class MeasuredValueController {
 	}
 
 	@GetMapping("/last")
-	public ResponseEntity<LastValueDTO> getLastValue(){
+	public ResponseEntity<ValueDTO> getLastValue(){
 		return new ResponseEntity(measuredValueService.getLastValue(), HttpStatus.OK);
+	}
+
+	@GetMapping("/intervalValues")
+	public ResponseEntity<List<ValueDTO>> getIntervalValues(String dateFrom, String dateTo){
+		return new ResponseEntity(measuredValueService.getIntervalValues(dateFrom, dateTo), HttpStatus.OK);
 	}
 }

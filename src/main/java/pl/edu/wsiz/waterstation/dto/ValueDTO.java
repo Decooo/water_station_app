@@ -11,8 +11,7 @@ import java.util.Date;
 @Setter
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class LastValueDTO {
-
+public class ValueDTO {
 	private Date measuredTime;
 	private float value;
 	private SensorDTO sensor;
