@@ -9,6 +9,7 @@ import pl.edu.wsiz.waterstation.entity.MeasuredValue;
 import pl.edu.wsiz.waterstation.repository.MeasuredValueRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MeasuredValueService {
@@ -20,13 +21,16 @@ public class MeasuredValueService {
 		this.measuredValueRepository = measuredValueRepository;
 	}
 
-	public ValueDTO getLastValue() {
-		MeasuredValue measuredValue = measuredValueRepository.getLastValue();
-		return new ModelMapper().map(measuredValue, ValueDTO.class);
+	public ValueDTO getLastValue() throws Exception {
+		Optional<MeasuredValue> measuredValue = measuredValueRepository.getLastValue();
+		if (measuredValue.isPresent())
+			return new ModelMapper().map(measuredValue.get(), ValueDTO.class);
+		else throw new Exception("Not found last value");
 	}
 
 	public List<ValueDTO> getIntervalValues(String dateFrom, String dateTo) {
 		List<MeasuredValue> measuredValues = measuredValueRepository.getIntervalValues(dateFrom, dateTo);
-		return new ModelMapper().map(measuredValues, new TypeToken<List<MeasuredValue>>() {}.getType());
+		return new ModelMapper().map(measuredValues, new TypeToken<List<MeasuredValue>>() {
+		}.getType());
 	}
 }

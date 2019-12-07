@@ -6,12 +6,13 @@ import org.springframework.stereotype.Repository;
 import pl.edu.wsiz.waterstation.entity.MeasuredValue;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface MeasuredValueRepository extends JpaRepository<MeasuredValue, Long> {
 
 	@Query(value = "SELECT * FROM measured_value ORDER BY measured_value_id DESC LIMIT 1", nativeQuery = true)
-	MeasuredValue getLastValue();
+	Optional<MeasuredValue> getLastValue();
 
 	@Query(value = "SELECT * FROM measured_value m where m.measured_time >= :dateFrom AND m.measured_time <= :dateTo ORDER BY measured_value_id DESC", nativeQuery = true)
 	List<MeasuredValue> getIntervalValues(String dateFrom, String dateTo);

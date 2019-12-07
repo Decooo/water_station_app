@@ -16,7 +16,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 
-//@RunWith(SpringRunner.class)
 @SpringBootTest
 public class GenerateSensorDate {
 

@@ -23,12 +23,16 @@ public class MeasuredValueController {
 	}
 
 	@GetMapping("/last")
-	public ResponseEntity<ValueDTO> getLastValue(){
-		return new ResponseEntity(measuredValueService.getLastValue(), HttpStatus.OK);
+	public ResponseEntity<ValueDTO> getLastValue() {
+		try {
+			return new ResponseEntity<>(measuredValueService.getLastValue(), HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 
 	@GetMapping("/intervalValues")
-	public ResponseEntity<List<ValueDTO>> getIntervalValues(String dateFrom, String dateTo){
-		return new ResponseEntity(measuredValueService.getIntervalValues(dateFrom, dateTo), HttpStatus.OK);
+	public ResponseEntity<List<ValueDTO>> getIntervalValues(String dateFrom, String dateTo) {
+		return new ResponseEntity<>(measuredValueService.getIntervalValues(dateFrom, dateTo), HttpStatus.OK);
 	}
 }
