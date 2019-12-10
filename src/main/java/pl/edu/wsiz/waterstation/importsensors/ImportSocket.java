@@ -60,38 +60,16 @@ class ImportSocket implements Runnable {
 		}
 	}
 
-	void closeSocket() {
-		System.out.println("Closing Server..");
-		running = false;
-		try {
-			for (Thread thread : servicingThreads) {
-				if (thread.isAlive()) {
-					System.out.print("Waiting on " + thread.getId() + " to close..");
-					thread.join();
-					System.out.println(" closed");
-				}
-			}
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-
-		try {
-			System.out.println("Terminating Connection");
-			serverSocket.close();
-		} catch (Exception e) {
-			System.out.println("Exception closing import socket");
-			e.printStackTrace();
-		}
-	}
-
-	@Override
-	public void run() {
-	}
-
 	private String read(Socket socket) throws IOException {
 		InputStream is = socket.getInputStream();
 		InputStreamReader isReader = new InputStreamReader(is);
 		BufferedReader br = new BufferedReader(isReader);
+
+		try {
+			Thread.sleep(100);
+		} catch (InterruptedException e) {
+			return StringUtils.EMPTY;
+		}
 
 		String headerLine;
 		while ((headerLine = br.readLine()).length() != 0) {
@@ -122,5 +100,33 @@ class ImportSocket implements Runnable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	void closeSocket() {
+		System.out.println("Closing Server..");
+		running = false;
+		try {
+			for (Thread thread : servicingThreads) {
+				if (thread.isAlive()) {
+					System.out.print("Waiting on " + thread.getId() + " to close..");
+					thread.join();
+					System.out.println(" closed");
+				}
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			System.out.println("Terminating Connection");
+			serverSocket.close();
+		} catch (Exception e) {
+			System.out.println("Exception closing import socket");
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void run() {
 	}
 }
