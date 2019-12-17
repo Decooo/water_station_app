@@ -12,7 +12,7 @@ import pl.edu.wsiz.waterstation.service.MeasuredValueService;
 
 import java.util.List;
 
-@CrossOrigin("locahost:4200")
+@CrossOrigin("http://localhost:4200")
 @RestController
 @RequestMapping("/value")
 public class MeasuredValueController {

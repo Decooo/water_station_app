@@ -11,7 +11,7 @@ import pl.edu.wsiz.waterstation.config.ImportDataConfig;
 import pl.edu.wsiz.waterstation.importsensors.ImportDataFacade;
 import pl.edu.wsiz.waterstation.importsensors.ImportDataService;
 
-@CrossOrigin("locahost:4200")
+@CrossOrigin("http://localhost:4200")
 @RestController
 @RequestMapping("/socket")
 public class SocketController {
