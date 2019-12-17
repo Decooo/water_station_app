@@ -3,6 +3,7 @@ package pl.edu.wsiz.waterstation.api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,6 +11,7 @@ import pl.edu.wsiz.waterstation.config.ImportDataConfig;
 import pl.edu.wsiz.waterstation.importsensors.ImportDataFacade;
 import pl.edu.wsiz.waterstation.importsensors.ImportDataService;
 
+@CrossOrigin("locahost:4200")
 @RestController
 @RequestMapping("/socket")
 public class SocketController {

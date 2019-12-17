@@ -3,6 +3,7 @@ package pl.edu.wsiz.waterstation.api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,6 +12,7 @@ import pl.edu.wsiz.waterstation.service.MeasuredValueService;
 
 import java.util.List;
 
+@CrossOrigin("locahost:4200")
 @RestController
 @RequestMapping("/value")
 public class MeasuredValueController {
@@ -34,5 +36,10 @@ public class MeasuredValueController {
 	@GetMapping("/intervalValues")
 	public ResponseEntity<List<ValueDTO>> getIntervalValues(String dateFrom, String dateTo) {
 		return new ResponseEntity<>(measuredValueService.getIntervalValues(dateFrom, dateTo), HttpStatus.OK);
+	}
+
+	@GetMapping("/last100")
+	public ResponseEntity<List<ValueDTO>> getLast100() {
+		return new ResponseEntity<>(measuredValueService.getLast100Values(), HttpStatus.OK);
 	}
 }
