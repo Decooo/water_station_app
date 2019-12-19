@@ -12,4 +12,5 @@ import lombok.Setter;
 public class SensorDTO {
 
 	private String name;
+	private Long sensorId;
 }

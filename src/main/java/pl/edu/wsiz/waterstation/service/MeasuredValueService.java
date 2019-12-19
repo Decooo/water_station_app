@@ -35,8 +35,8 @@ public class MeasuredValueService {
 	}
 
 	public List<ValueDTO> getLast100Values() {
-		List<MeasuredValue> measuredValues = measuredValueRepository.getLast100Values();
-		return new ModelMapper().map(measuredValues, new TypeToken<List<MeasuredValue>>() {
+		List<MeasuredValue> measuredValues = measuredValueRepository.getLast500Values();
+		return new ModelMapper().map(measuredValues, new TypeToken<List<ValueDTO>>() {
 		}.getType());
 	}
 }

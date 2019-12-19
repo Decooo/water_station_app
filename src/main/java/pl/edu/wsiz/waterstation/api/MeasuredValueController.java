@@ -38,8 +38,8 @@ public class MeasuredValueController {
 		return new ResponseEntity<>(measuredValueService.getIntervalValues(dateFrom, dateTo), HttpStatus.OK);
 	}
 
-	@GetMapping("/last100")
-	public ResponseEntity<List<ValueDTO>> getLast100() {
+	@GetMapping("/last500")
+	public ResponseEntity<List<ValueDTO>> getLast500() {
 		return new ResponseEntity<>(measuredValueService.getLast100Values(), HttpStatus.OK);
 	}
 }
