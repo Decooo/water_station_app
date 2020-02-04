@@ -11,14 +11,14 @@ import java.util.Optional;
 @Repository
 public interface MeasuredValueRepository extends JpaRepository<MeasuredValue, Long> {
 
-	@Query(value = "SELECT * FROM measured_value ORDER BY measured_value_id DESC LIMIT 1", nativeQuery = true)
-	Optional<MeasuredValue> getLastValue();
+	@Query(value = "SELECT * FROM measured_value m where m.sensor_id = :sensorId ORDER BY measured_value_id DESC LIMIT 1", nativeQuery = true)
+	Optional<MeasuredValue> getLastValue(String sensorId);
 
-	@Query(value = "SELECT * FROM measured_value m where m.measured_time >= :dateFrom AND m.measured_time <= :dateTo ORDER BY measured_value_id DESC", nativeQuery = true)
-	List<MeasuredValue> getIntervalValues(String dateFrom, String dateTo);
+	@Query(value = "SELECT * FROM measured_value m where m.measured_time >= :dateFrom AND m.measured_time <= :dateTo and m.sensor_id = :sensorId ORDER BY measured_value_id DESC", nativeQuery = true)
+	List<MeasuredValue> getIntervalValues(String dateFrom, String dateTo, String sensorId);
 
-	@Query(value = "SELECT * FROM measured_value m where m.sensor_id = 3 ORDER BY measured_value_id DESC LIMIT 100", nativeQuery = true)
-	List<MeasuredValue> getLast100Values();
+	@Query(value = "SELECT * FROM measured_value m where m.sensor_id = :sensorId ORDER BY measured_value_id DESC LIMIT 100", nativeQuery = true)
+	List<MeasuredValue> getLast100Values(String sensorId);
 
 	MeasuredValue findByMeasuredValueId(long id);
 
