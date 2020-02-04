@@ -17,8 +17,8 @@ public interface MeasuredValueRepository extends JpaRepository<MeasuredValue, Lo
 	@Query(value = "SELECT * FROM measured_value m where m.measured_time >= :dateFrom AND m.measured_time <= :dateTo ORDER BY measured_value_id DESC", nativeQuery = true)
 	List<MeasuredValue> getIntervalValues(String dateFrom, String dateTo);
 
-	@Query(value = "SELECT * FROM measured_value m where m.sensor_id = 3 ORDER BY measured_value_id DESC LIMIT 500", nativeQuery = true)
-	List<MeasuredValue> getLast500Values();
+	@Query(value = "SELECT * FROM measured_value m where m.sensor_id = 3 ORDER BY measured_value_id DESC LIMIT 100", nativeQuery = true)
+	List<MeasuredValue> getLast100Values();
 
 	MeasuredValue findByMeasuredValueId(long id);
 
