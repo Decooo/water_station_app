@@ -4,7 +4,6 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.edu.wsiz.waterstation.dto.SensorDTO;
 import pl.edu.wsiz.waterstation.dto.ValueDTO;
 import pl.edu.wsiz.waterstation.entity.MeasuredValue;
 import pl.edu.wsiz.waterstation.repository.MeasuredValueRepository;

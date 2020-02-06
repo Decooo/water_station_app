@@ -12,6 +12,6 @@ import java.util.Optional;
 public interface SensorRepository extends JpaRepository<Sensor,Long> {
 
 	Optional<Sensor> findByPhysicalSensorId(String physicalSensorId);
-	@Query(value = "SELECT * FROM sensor s ORDER BY s.sensor_id DESC", nativeQuery = true)
+	@Query(value = "SELECT * FROM sensor s ORDER BY s.sensor_id ASC", nativeQuery = true)
 	List<Sensor> getSensors();
 }
