@@ -12,6 +12,7 @@ import java.util.Date;
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class ValueDTO {
+	private Long valueId;
 	private Date measuredTime;
 	private float value;
 	private SensorDTO sensor;
